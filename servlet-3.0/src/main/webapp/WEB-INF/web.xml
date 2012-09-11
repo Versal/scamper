@@ -6,13 +6,23 @@
   >
 
   <servlet>
-    <servlet-name>scamper</servlet-name>
+    <servlet-name>basic</servlet-name>
+    <servlet-class>scamper.BasicServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>basic</servlet-name>
+    <url-pattern>/basic/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>async</servlet-name>
     <servlet-class>scamper.AsyncServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>scamper</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <servlet-name>async</servlet-name>
+    <url-pattern>/async/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
