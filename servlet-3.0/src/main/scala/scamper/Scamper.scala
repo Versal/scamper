@@ -41,7 +41,9 @@ object AsyncExecutor {
 class AsyncServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
     req.getRequestURI() match {
-      case "/async/simple" => Responder.simple(res)
+      case "/async/simple" =>
+        req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
+        AsyncExecutor.execute(req.startAsync())(Responder.simple(res))
       case "/async/slow" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
         AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
