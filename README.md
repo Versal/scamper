@@ -2,7 +2,7 @@
 
 * Install sbt
   * https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
-* Download _scamper_
+* Download scamper
   * `git clone git://github.com/Versal/scamper.git`
 * Run the server
   * `cd scamper/servlet`
