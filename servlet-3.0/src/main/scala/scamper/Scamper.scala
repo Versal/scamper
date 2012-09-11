@@ -32,7 +32,7 @@ class BasicServlet extends HttpServlet {
 }
 
 object AsyncExecutor {
-  private val execSvc = Executors.newFixedThreadPool(100)
+  private val execSvc = Executors.newFixedThreadPool(24)
   def runnable(f: => Any): Runnable = new Runnable { def run() { f } }
   def execute(ctx: AsyncContext)(f: => Any) =
     execSvc.execute(runnable { f; ctx.complete() })
@@ -42,7 +42,9 @@ class AsyncServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
     req.getRequestURI() match {
       case "/async/simple" => Responder.simple(res)
-      case "/async/slow" => AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
+      case "/async/slow" =>
+        req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
+        AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
     }
 }
 
