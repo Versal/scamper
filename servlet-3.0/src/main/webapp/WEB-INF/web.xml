@@ -9,7 +9,6 @@
     <servlet-name>basic</servlet-name>
     <servlet-class>scamper.BasicServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>basic</servlet-name>
     <url-pattern>/basic/*</url-pattern>
@@ -19,10 +18,18 @@
     <servlet-name>async</servlet-name>
     <servlet-class>scamper.AsyncServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>async</servlet-name>
     <url-pattern>/async/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>scalatra</servlet-name>
+    <servlet-class>scamper.ScamperScalatraServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>scalatra</servlet-name>
+    <url-pattern>/scalatra/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

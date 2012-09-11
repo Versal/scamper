@@ -1,10 +1,13 @@
 package scamper
 
 import java.util.concurrent.Executors
+
 import org.eclipse.jetty.server.nio.SelectChannelConnector
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.util.thread.QueuedThreadPool
 import org.eclipse.jetty.webapp.WebAppContext
+import org.scalatra.ScalatraServlet
+
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -28,22 +31,35 @@ class BasicServlet extends HttpServlet {
     }
 }
 
-object AsyncServlet {
-  val exec = Executors.newFixedThreadPool(1000)
+object AsyncExecutor {
+  private val execSvc = Executors.newFixedThreadPool(100)
   def runnable(f: => Any): Runnable = new Runnable { def run() { f } }
-  def async(ctx: AsyncContext)(f: => Any) =
-    exec.execute(runnable { f; ctx.complete() })
+  def execute(ctx: AsyncContext)(f: => Any) =
+    execSvc.execute(runnable { f; ctx.complete() })
 }
 
 class AsyncServlet extends HttpServlet {
-
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
-    AsyncServlet.async(req.startAsync()) {
-      req.getRequestURI() match {
-        case "/async/simple" => Responder.simple(res)
-        case "/async/slow" => Responder.slow(res)
-      }
+    req.getRequestURI() match {
+      case "/async/simple" => Responder.simple(res)
+      case "/async/slow" => AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
     }
+}
+
+class ScamperScalatraServlet extends ScalatraServlet {
+
+  get("/simple") {
+    contentType = "text/html"
+    <h1>simple</h1>
+  }
+
+  get("/slow") {
+    contentType = "text/html"
+    val start = System.currentTimeMillis
+    Thread.sleep(200)
+    val stop = System.currentTimeMillis
+    <h1>slept for { stop - start } ms</h1>
+  }
 }
 
 object Launcher extends App {
