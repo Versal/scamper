@@ -1,0 +1,2 @@
+GET    /simple        scamper.ScamperController.simple()
+GET    /slow          scamper.ScamperController.slow()
