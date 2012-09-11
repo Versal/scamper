@@ -62,6 +62,26 @@ class ScamperScalatraServlet extends ScalatraServlet {
   }
 }
 
+class AsyncScamperScalatraServlet extends ScalatraServlet {
+  
+  override def handle(req: HttpServletRequest, res: HttpServletResponse) {
+    AsyncExecutor.execute(req.startAsync())(super.handle(req, res))
+  }
+  
+  get("/scalatra-async/simple") {
+    contentType = "text/html"
+    <h1>simple</h1>
+  }
+
+  get("/scalatra-async/slow") {
+    contentType = "text/html"
+    val start = System.currentTimeMillis
+    Thread.sleep(200)
+    val stop = System.currentTimeMillis
+    <h1>slept for { stop - start } ms</h1>
+  }
+}
+
 object Launcher extends App {
 
   val server = new Server()

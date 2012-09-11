@@ -32,4 +32,13 @@
     <url-pattern>/scalatra/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>scalatra-async</servlet-name>
+    <servlet-class>scamper.AsyncScamperScalatraServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>scalatra-async</servlet-name>
+    <url-pattern>/scalatra-async/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>
