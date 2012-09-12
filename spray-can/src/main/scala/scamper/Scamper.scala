@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 
 import akka.actor.Actor
 import akka.actor.Supervisor
+import akka.routing.Routing
+import akka.routing.CyclicIterator
 import akka.config.Supervision.OneForOneStrategy
 import akka.config.Supervision.Permanent
 import akka.config.Supervision.Supervise
@@ -19,7 +21,13 @@ object Boot extends App {
 
   val mainModule = new ScamperService {}
 
-  val httpService = Actor.actorOf(new HttpService(mainModule.scamperService))
+  val scamperActors = for {
+    _ <- 1 to 24
+    val actor = Actor.actorOf[ScamperActor]
+    _ = actor.start
+  } yield actor
+
+  val httpService = Routing.loadBalancerActor(new CyclicIterator(scamperActors))
   val rootService = Actor.actorOf(new SprayCanRootService(httpService))
   val sprayCanServer = Actor.actorOf(new HttpServer())
 
@@ -31,6 +39,8 @@ object Boot extends App {
         Supervise(rootService, Permanent),
         Supervise(sprayCanServer, Permanent))))
 }
+
+class ScamperActor extends HttpService((new ScamperService {}).scamperService)
 
 trait ScamperService extends Directives {
 
