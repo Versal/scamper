@@ -22,6 +22,11 @@ cd scamper/play-2
 sbt run
 ```
 
+```
+cd scamper/blueeyes
+sbt run scamper.ScamperServer --configFile blueeyes.config
+```
+
 ### Load test the servers
 
 ```
