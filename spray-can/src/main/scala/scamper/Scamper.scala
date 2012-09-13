@@ -44,21 +44,32 @@ class ScamperActor extends HttpService((new ScamperService {}).scamperService)
 
 trait ScamperService extends Directives {
 
+  def sleep(ms: Long): Long = {
+    val start = System.currentTimeMillis
+    Thread.sleep(ms)
+    val stop = System.currentTimeMillis
+    stop - start
+  }
+
   val scamperService = {
-    path("simple") {
+    path("fast") {
       get {
         completeWith {
-          <h1>simple</h1>
+          <h1>slept for { sleep(0) } ms</h1>
         }
       }
     } ~
+      path("medium") {
+        get {
+          completeWith {
+            <h1>slept for { sleep(150) } ms</h1>
+          }
+        }
+      } ~
       path("slow") {
         get {
           completeWith {
-            val start = System.currentTimeMillis
-            Thread.sleep(200)
-            val stop = System.currentTimeMillis
-            <h1><h1>slept for { stop - start } ms</h1></h1>
+            <h1>slept for { sleep(300) } ms</h1>
           }
         }
       }

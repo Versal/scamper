@@ -14,19 +14,24 @@ import javax.servlet.http.HttpServletResponse
 import javax.servlet.AsyncContext
 
 object Responder {
-  def simple(res: HttpServletResponse) { res.getWriter().write("<h1>simple</h1>") }
-  def slow(res: HttpServletResponse) {
+  
+  def sleep(ms: Long): Long = {
     val start = System.currentTimeMillis
-    Thread.sleep(200)
+    Thread.sleep(ms)
     val stop = System.currentTimeMillis
-    res.getWriter().write("<h1>slept for %d ms</h1>".format(stop - start))
+    stop - start
   }
+
+  def fast(res: HttpServletResponse) { res.getWriter().write("<h1>slept for %d ms</h1>".format(sleep(0))) }
+  def medium(res: HttpServletResponse) { res.getWriter().write("<h1>slept for %d ms</h1>".format(sleep(150))) }
+  def slow(res: HttpServletResponse) { res.getWriter().write("<h1>slept for %d ms</h1>".format(sleep(300))) }
 }
 
 class BasicServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
     req.getRequestURI() match {
-      case "/basic/simple" => Responder.simple(res)
+      case "/basic/fast" => Responder.fast(res)
+      case "/basic/medium" => Responder.medium(res)
       case "/basic/slow" => Responder.slow(res)
     }
 }
@@ -41,9 +46,12 @@ object AsyncExecutor {
 class AsyncServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
     req.getRequestURI() match {
-      case "/async/simple" =>
+      case "/async/fast" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
-        AsyncExecutor.execute(req.startAsync())(Responder.simple(res))
+        AsyncExecutor.execute(req.startAsync())(Responder.fast(res))
+      case "/async/medium" =>
+        req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
+        AsyncExecutor.execute(req.startAsync())(Responder.medium(res))
       case "/async/slow" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
         AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
@@ -52,37 +60,41 @@ class AsyncServlet extends HttpServlet {
 
 class ScamperScalatraServlet extends ScalatraServlet {
 
-  get("/simple") {
+  get("/fast") {
     contentType = "text/html"
-    <h1>simple</h1>
+    <h1>slept for { Responder.sleep(0) } ms</h1>
+  }
+
+  get("/medium") {
+    contentType = "text/html"
+    <h1>slept for { Responder.sleep(150) } ms</h1>
   }
 
   get("/slow") {
     contentType = "text/html"
-    val start = System.currentTimeMillis
-    Thread.sleep(200)
-    val stop = System.currentTimeMillis
-    <h1>slept for { stop - start } ms</h1>
+    <h1>slept for { Responder.sleep(300) } ms</h1>
   }
 }
 
 class AsyncScamperScalatraServlet extends ScalatraServlet {
-  
+
   override def handle(req: HttpServletRequest, res: HttpServletResponse) {
     AsyncExecutor.execute(req.startAsync())(super.handle(req, res))
   }
-  
-  get("/scalatra-async/simple") {
+
+  get("/scalatra-async/fast") {
     contentType = "text/html"
-    <h1>simple</h1>
+    <h1>slept for { Responder.sleep(0) } ms</h1>
+  }
+
+  get("/scalatra-async/medium") {
+    contentType = "text/html"
+    <h1>slept for { Responder.sleep(150) } ms</h1>
   }
 
   get("/scalatra-async/slow") {
     contentType = "text/html"
-    val start = System.currentTimeMillis
-    Thread.sleep(200)
-    val stop = System.currentTimeMillis
-    <h1>slept for { stop - start } ms</h1>
+    <h1>slept for { Responder.sleep(300) } ms</h1>
   }
 }
 

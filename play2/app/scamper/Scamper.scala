@@ -18,15 +18,16 @@ object ScamperController extends Controller {
       .withHeaders(("Access-Control-Allow-Origin", "*"))
   }
 
-  def simple() = Action { implicit request =>
-    response(200, "<h1>simple</h1>", "text/html")
-  }
+  def fast() = Action { implicit request => response(200, "<h1>slept for %d ms</h1>".format(sleep(0)), "text/html") }
 
-  def slow() = Action { implicit request =>
+  def medium() = Action { implicit request => response(200, "<h1>slept for %d ms</h1>".format(sleep(150)), "text/html") }
+
+  def slow() = Action { implicit request => response(200, "<h1>slept for %d ms</h1>".format(sleep(300)), "text/html") }
+
+  def sleep(ms: Long): Long = {
     val start = System.currentTimeMillis
-    Thread.sleep(200)
+    Thread.sleep(ms)
     val stop = System.currentTimeMillis
-    response(200, "<h1>slept for %d ms</h1>".format(stop - start), "text/html")
+    stop - start
   }
-
 }
