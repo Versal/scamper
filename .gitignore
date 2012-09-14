@@ -9,3 +9,7 @@ bin/
 project/target/
 project/project/
 dist/
+lib_managed/
+*/project/plugins/project/
+*/project/plugins/src_managed/
+
