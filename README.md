@@ -1,6 +1,12 @@
 # Quick start
 
-## Download JMeter
+## Download scamper
+
+```
+git clone git://github.com/Versal/scamper.git
+```
+
+## Install JMeter
 
 http://jmeter.apache.org/
 
@@ -15,12 +21,6 @@ npm install -g express
 ## Install sbt
 
 https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
-
-## Download scamper
-
-```
-git clone git://github.com/Versal/scamper.git
-```
 
 ## Run and test each server
 
