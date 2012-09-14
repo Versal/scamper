@@ -121,3 +121,13 @@ jmeter -n -t scamper/servlet-3.0/scalatra-async-load-test.jmx
 ```
 jmeter -n -t scamper/node.js/load-test.jmx
 ```
+
+### Finatra
+
+```
+(cd scamper/finatra ; sbt run)
+```
+
+```
+jmeter -n -t scamper/finatra/load-test.jmx
+```
