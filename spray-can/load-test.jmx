@@ -45,17 +45,17 @@
           </elementProp>
           <elementProp name="fastThreads" elementType="Argument">
             <stringProp name="Argument.name">fastThreads</stringProp>
-            <stringProp name="Argument.value">81</stringProp>
+            <stringProp name="Argument.value">100</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="mediumThreads" elementType="Argument">
             <stringProp name="Argument.name">mediumThreads</stringProp>
-            <stringProp name="Argument.value">27</stringProp>
+            <stringProp name="Argument.value">75</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="slowThreads" elementType="Argument">
             <stringProp name="Argument.name">slowThreads</stringProp>
-            <stringProp name="Argument.value">9</stringProp>
+            <stringProp name="Argument.value">25</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
