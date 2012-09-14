@@ -13,3 +13,4 @@ lib_managed/
 */project/plugins/project/
 */project/plugins/src_managed/
 
+node_modules/

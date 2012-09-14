@@ -4,6 +4,14 @@
 
 http://jmeter.apache.org/
 
+## Install Node.js
+
+```
+brew install nodejs
+npm install -g express
+(cd scamper/node.js ; npm link express)
+```
+
 ## Install sbt
 
 https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
@@ -80,11 +88,11 @@ jmeter -n -t scamper/play2-mini/load-test.jmx
 ### [spray-can](https://github.com/spray/spray-can)
 
 ```
-(cd scamper/FOOBAR ; sbt run)
+(cd scamper/spray-can ; sbt run)
 ```
 
 ```
-jmeter -n -t scamper/FOOBAR/load-test.jmx
+jmeter -n -t scamper/spray-can/load-test.jmx
 ```
 
 ### Servlet 3.0
@@ -98,4 +106,14 @@ jmeter -n -t scamper/servlet-3.0/basic-load-test.jmx
 jmeter -n -t scamper/servlet-3.0/async-load-test.jmx
 jmeter -n -t scamper/servlet-3.0/scalatra-load-test.jmx
 jmeter -n -t scamper/servlet-3.0/scalatra-async-load-test.jmx
+```
+
+### Node.js
+
+```
+(cd scamper/node.js ; node app.js)
+```
+
+```
+jmeter -n -t scamper/node.js/load-test.jmx
 ```
