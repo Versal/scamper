@@ -1,4 +1,8 @@
-# Quick start
+# About
+
+Scamper is a collection of RESTful libraries and frameworks, organized as a testbed for comparing the raw performance characteristics of each.
+
+# Getting started
 
 ## Download scamper
 
@@ -18,7 +22,7 @@ npm install -g express
 (cd scamper/node.js ; npm link express)
 ```
 
-## Install sbt
+## Install sbt (0.12.0 or newer)
 
 https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 
