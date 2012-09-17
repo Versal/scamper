@@ -32,11 +32,11 @@ app.get('/slow', scamper.slow);
 /**
  * Run Node.js Server
  */
-var server = http.createServer(app).listen(3000, '127.0.0.1', function(){
+var server = http.createServer(app).listen(9000, '127.0.0.1', function(){
     /**
      * Start Message
      */
-    console.log("Node.js Web server listening on port 3000");
+    console.log("Node.js Web server listening on port 9000");
 });
 
 

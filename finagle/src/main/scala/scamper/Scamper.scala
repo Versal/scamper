@@ -2,7 +2,6 @@ package scamper
 
 import java.net.InetSocketAddress
 import java.net.SocketAddress
-
 import org.jboss.netty.buffer.ChannelBuffers.copiedBuffer
 import org.jboss.netty.handler.codec.http.HttpResponseStatus.OK
 import org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1
@@ -10,14 +9,17 @@ import org.jboss.netty.handler.codec.http.DefaultHttpResponse
 import org.jboss.netty.handler.codec.http.HttpRequest
 import org.jboss.netty.handler.codec.http.HttpResponse
 import org.jboss.netty.util.CharsetUtil.UTF_8
-
 import com.twitter.finagle.builder.Server
 import com.twitter.finagle.builder.ServerBuilder
 import com.twitter.finagle.http.Http
 import com.twitter.finagle.Service
 import com.twitter.util.Future
+import com.twitter.util.FuturePool
+import java.util.concurrent.Executors
 
 object Scamper extends App {
+
+  val futurePool = FuturePool(Executors.newFixedThreadPool(24))
 
   val service: Service[HttpRequest, HttpResponse] = new Service[HttpRequest, HttpResponse] {
 
@@ -28,10 +30,10 @@ object Scamper extends App {
     }
   }
 
-  def sleepilyRespond(request: HttpRequest, delay: Long): Future[HttpResponse] = {
+  def sleepilyRespond(request: HttpRequest, delay: Long) = futurePool {
     val response = new DefaultHttpResponse(HTTP_1_1, OK)
     response.setContent(copiedBuffer("<h1>slept for %d ms</h1>".format(sleep(delay)), UTF_8))
-    Future(response)
+    response
   }
 
   def sleep(ms: Long): Long = {
@@ -41,7 +43,7 @@ object Scamper extends App {
     stop - start
   }
 
-  val address: SocketAddress = new InetSocketAddress(10000)
+  val address: SocketAddress = new InetSocketAddress(9000)
 
   val server: Server = ServerBuilder()
     .codec(Http.get())

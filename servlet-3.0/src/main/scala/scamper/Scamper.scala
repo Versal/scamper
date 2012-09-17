@@ -26,7 +26,7 @@ object Launcher extends App {
   val server = new Server()
 
   val connector = new SelectChannelConnector()
-  connector.setPort(9001)
+  connector.setPort(9000)
   connector.setThreadPool(new QueuedThreadPool(24))
 
   server.addConnector(connector)

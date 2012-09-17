@@ -41,7 +41,7 @@ import sbt._
 class scamperProject(info: ProjectInfo) extends DefaultWebProject(info) with IdeaProject {
 
     val jettyComet = "org.eclipse.jetty" % "jetty-continuation" % "7.0.2.v20100331" % "compile"
-    val jetty7     = "org.eclipse.jetty" % "jetty-webapp"       % "7.0.2.v20100331" % "test"
+    val jetty7     = "org.eclipse.jetty" % "jetty-webapp"       % "7.0.2.v20100331" % "compile,test"
 
     //repo
     val guiceMaven = "guice maven repository" at "http://guice-maven.googlecode.com/svn/trunk"

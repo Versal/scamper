@@ -15,7 +15,7 @@ libraryDependencies ++= {
 
 // Customize any further dependencies as desired
 libraryDependencies ++= Seq(
-  "org.eclipse.jetty" % "jetty-webapp" % "7.3.0.v20110203" % "container,test->default",
+  "org.eclipse.jetty" % "jetty-webapp" % "7.3.0.v20110203" % "compile,container,test->default",
   "org.scala-tools.testing" % "specs_2.9.0" % "1.6.8" % "test", // For specs.org tests
   "junit" % "junit" % "4.8" % "test->default", // For JUnit 4 testing
   "javax.servlet" % "servlet-api" % "2.5" % "provided->default",
@@ -24,4 +24,4 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "jcl-over-slf4j" % "1.6.4" // only used for debugging.
 )
 
-
+port in container.Configuration := 9000

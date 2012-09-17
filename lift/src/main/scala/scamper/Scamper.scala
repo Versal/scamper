@@ -3,6 +3,10 @@ package scamper
 import net.liftweb.http.rest.RestHelper
 import net.liftweb.http.GetRequest
 import net.liftweb.http.Req
+import org.eclipse.jetty.server.nio.SelectChannelConnector
+import org.eclipse.jetty.webapp.WebAppContext
+import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.util.thread.QueuedThreadPool
 
 object Scamper extends RestHelper {
 
@@ -21,4 +25,23 @@ object Scamper extends RestHelper {
     stop - start
   }
 
+}
+
+object Launcher extends App {
+
+  val server = new Server()
+
+  val connector = new SelectChannelConnector()
+  connector.setPort(9000)
+  connector.setThreadPool(new QueuedThreadPool(24))
+
+  server.addConnector(connector)
+
+  val webapp = new WebAppContext()
+  webapp.setContextPath("/")
+  webapp.setWar("src/main/webapp")
+  server.setHandler(webapp)
+
+  server.start()
+  server.join()
 }

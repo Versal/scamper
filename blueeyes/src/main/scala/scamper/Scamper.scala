@@ -1,18 +1,25 @@
 package scamper
 
+import org.eclipse.jetty.server.nio.SelectChannelConnector
+import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.util.thread.QueuedThreadPool
+import org.eclipse.jetty.webapp.WebAppContext
 import akka.dispatch.Future
-
-import blueeyes.BlueEyesServiceBuilder
-import blueeyes.core.http.{HttpRequest, HttpResponse, HttpStatus}
-import blueeyes.core.http.HttpStatusCodes._
-import blueeyes.core.data.{ByteChunk, BijectionsChunkString}
-
+import blueeyes.core.data.ByteChunk
+import blueeyes.core.data.BijectionsChunkString
+import blueeyes.core.http.HttpRequest
+import blueeyes.core.http.HttpResponse
 import blueeyes.BlueEyesServer
+import blueeyes.BlueEyesServiceBuilder
+import blueeyes.ServletServer
+import blueeyes.core.service.engines.servlet.ServletEngine
 
-object ScamperServer extends BlueEyesServer with ScamperService
+object NettyScamperServer extends BlueEyesServer with ScamperService
+
+class ScamperServlet extends ServletServer with ServletEngine with ScamperService
 
 trait ScamperService extends BlueEyesServiceBuilder with BijectionsChunkString {
-  
+
   def sleep(ms: Long): Long = {
     val start = System.currentTimeMillis
     Thread.sleep(ms)
@@ -25,30 +32,48 @@ trait ScamperService extends BlueEyesServiceBuilder with BijectionsChunkString {
       startup {
         Future { () }
       } ->
-      request { config: Unit =>
-        path("/fast") {
-          (request: HttpRequest[ByteChunk]) =>
+        request { config: Unit =>
+          path("/fast") {
+            (request: HttpRequest[ByteChunk]) =>
               Future {
                 HttpResponse[ByteChunk](content = Some("<h1>slept for %d ms</h1>".format(sleep(0))))
               }
-        } ~
-        path("/medium") {
-          (request: HttpRequest[ByteChunk]) =>
-              Future {
-                HttpResponse[ByteChunk](content = Some("<h1>slept for %d ms</h1>".format(sleep(150))))
-              }
-        } ~
-        path("/slow") {
-          (request: HttpRequest[ByteChunk]) =>
-              Future {
-                HttpResponse[ByteChunk](content = Some("<h1>slept for %d ms</h1>".format(sleep(300))))
-              }
+          } ~
+            path("/medium") {
+              (request: HttpRequest[ByteChunk]) =>
+                Future {
+                  HttpResponse[ByteChunk](content = Some("<h1>slept for %d ms</h1>".format(sleep(150))))
+                }
+            } ~
+            path("/slow") {
+              (request: HttpRequest[ByteChunk]) =>
+                Future {
+                  HttpResponse[ByteChunk](content = Some("<h1>slept for %d ms</h1>".format(sleep(300))))
+                }
+            }
+        } ->
+        shutdown { config =>
+          println("Shutting down")
+          Future { () }
         }
-      } ->
-      shutdown { config =>
-        println("Shutting down")
-        Future { () }
-      }
   }
 }
 
+object JettyScamperServer extends App {
+
+  val server = new Server()
+
+  val connector = new SelectChannelConnector()
+  connector.setPort(9000)
+  connector.setThreadPool(new QueuedThreadPool(24))
+
+  server.addConnector(connector)
+
+  val webapp = new WebAppContext()
+  webapp.setContextPath("/")
+  webapp.setWar("src/main/webapp")
+  server.setHandler(webapp)
+
+  server.start()
+  server.join()
+}

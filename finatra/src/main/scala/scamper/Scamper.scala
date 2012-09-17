@@ -7,7 +7,7 @@ object Scamper extends App {
   val scamper = new Scamper
 
   FinatraServer.register(scamper)
-  FinatraServer.start()
+  FinatraServer.start(port = 9000)
 }
 
 class Scamper extends Controller {

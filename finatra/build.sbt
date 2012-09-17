@@ -1,4 +1,4 @@
-name := "finatra-scamper"
+name := "scamper-finatra"
 
 resolvers += "repo.juliocapote.com" at "http://repo.juliocapote.com"
 

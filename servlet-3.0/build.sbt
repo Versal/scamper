@@ -16,4 +16,4 @@ libraryDependencies ++= Seq(
   , "org.scalatra" %% "scalatra" % "2.0.4"
 )
 
-port in container.Configuration := 9001
+port in container.Configuration := 9000

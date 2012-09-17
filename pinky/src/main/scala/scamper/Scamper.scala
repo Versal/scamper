@@ -2,6 +2,13 @@ package scamper
 
 import org.pinky.guice.{CakeServletModule, PinkyServletContextListener}
 
+
+import org.eclipse.jetty.util.thread.QueuedThreadPool
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.webapp.WebAppContext;
+
 /**
  * this class is referenced in the generated web.xml
  */
@@ -53,3 +60,25 @@ trait ScamperServlet {
   }  
 }
 
+
+object JettyScamperServer {
+
+  def main(args: Array[String]) {
+
+    val server = new Server()
+
+    val connector = new SelectChannelConnector()
+    connector.setPort(9000)
+    connector.setThreadPool(new QueuedThreadPool(24))
+
+    server.addConnector(connector)
+
+    val webapp = new WebAppContext()
+    webapp.setContextPath("/")
+    webapp.setWar("src/main/webapp")
+    server.setHandler(webapp)
+
+    server.start()
+    server.join()
+  }
+}

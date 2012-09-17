@@ -36,7 +36,7 @@ https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 ```
 
 ```
-jmeter -n -t scamper/blueeyes/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Finagle](https://github.com/twitter/finagle)
@@ -46,27 +46,27 @@ jmeter -n -t scamper/blueeyes/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/finagle/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Lift](https://github.com/lift/lift)
 
 ```
-(cd scamper/lift ; sbt "~container:start")
+(cd scamper/lift ; sbt run)
 ```
 
 ```
-jmeter -n -t scamper/lift/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Pinky](https://github.com/pk11/pinky)
 
 ```
-(cd scamper/pinky ; sbt update ~jetty-run)
+(cd scamper/pinky ; sbt update run)
 ```
 
 ```
-jmeter -n -t scamper/pinky/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Play 2.0](https://github.com/playframework/Play20)
@@ -76,7 +76,7 @@ jmeter -n -t scamper/pinky/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/play2/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Play 2.0 mini](https://github.com/typesafehub/play2-mini)
@@ -86,7 +86,7 @@ jmeter -n -t scamper/play2/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/play2-mini/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [spray-can](https://github.com/spray/spray-can)
@@ -96,7 +96,7 @@ jmeter -n -t scamper/play2-mini/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/spray-can/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### Servlet 3.0
@@ -119,7 +119,7 @@ jmeter -n -t scamper/servlet-3.0/scalatra-async-load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/node.js/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Finatra](https://github.com/capotej/finatra)
@@ -129,5 +129,5 @@ jmeter -n -t scamper/node.js/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/finatra/load-test.jmx
+jmeter -n -t scamper/load-test.jmx
 ```
