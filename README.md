@@ -28,15 +28,21 @@ https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 
 ## Run and test each server
 
+Each server can be tested with JMeter or ApacheBench:
+
+```
+jmeter -n -t scamper/load-test.jmx
+jmeter -n -t scamper/fast-test.jmx
+```
+
+```
+ab -c 5 -n 10000 127.0.0.1:9000/fast
+```
 
 ### [BlueEyes](https://github.com/jdegoes/blueeyes)
 
 ```
 (cd scamper/blueeyes ; sbt "run --configFile blueeyes.config")
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Finagle](https://github.com/twitter/finagle)
@@ -45,18 +51,10 @@ jmeter -n -t scamper/load-test.jmx
 (cd scamper/finagle ; sbt run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
 ### [Lift](https://github.com/lift/lift)
 
 ```
 (cd scamper/lift ; sbt run)
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Pinky](https://github.com/pk11/pinky)
@@ -65,18 +63,10 @@ jmeter -n -t scamper/load-test.jmx
 (cd scamper/pinky ; sbt update run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
 ### [Play 2.0](https://github.com/playframework/Play20)
 
 ```
 (cd scamper/play2 ; sbt run)
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Play 2.0 mini](https://github.com/typesafehub/play2-mini)
@@ -85,18 +75,10 @@ jmeter -n -t scamper/load-test.jmx
 (cd scamper/play2-mini ; sbt run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
 ### [spray-can](https://github.com/spray/spray-can)
 
 ```
 (cd scamper/spray-can ; sbt run)
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
 
 ### Servlet 3.0
@@ -105,46 +87,26 @@ jmeter -n -t scamper/load-test.jmx
 (cd scamper/servlet-3.0 ; sbt run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
-#### Servlet 3.0 async
+#### Asynchronous Servlet 3.0
 
 ```
 (cd scamper/servlet-3.0-async ; sbt run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
-#### Scalatra
+#### [Scalatra](https://github.com/scalatra/scalatra)
 
 ```
 (cd scamper/scalatra ; sbt run)
 ```
 
-```
-jmeter -n -t scamper/load-test.jmx
-```
-
-### Node.js
+### [Node.js](http://nodejs.org/)
 
 ```
 (ulimit -n 4096 ; cd scamper/node.js ; node app.js)
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
 
 ### [Finatra](https://github.com/capotej/finatra)
 
 ```
 (cd scamper/finatra ; sbt run)
-```
-
-```
-jmeter -n -t scamper/load-test.jmx
 ```
