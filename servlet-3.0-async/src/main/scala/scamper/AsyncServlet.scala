@@ -17,13 +17,13 @@ object AsyncExecutor {
 class AsyncServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, res: HttpServletResponse) =
     req.getRequestURI() match {
-      case "/async/fast" =>
+      case "/fast" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
         AsyncExecutor.execute(req.startAsync())(Responder.fast(res))
-      case "/async/medium" =>
+      case "/medium" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
         AsyncExecutor.execute(req.startAsync())(Responder.medium(res))
-      case "/async/slow" =>
+      case "/slow" =>
         req.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true)
         AsyncExecutor.execute(req.startAsync())(Responder.slow(res))
     }
