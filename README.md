@@ -106,10 +106,27 @@ jmeter -n -t scamper/load-test.jmx
 ```
 
 ```
-jmeter -n -t scamper/servlet-3.0/basic-load-test.jmx
-jmeter -n -t scamper/servlet-3.0/async-load-test.jmx
-jmeter -n -t scamper/servlet-3.0/scalatra-load-test.jmx
-jmeter -n -t scamper/servlet-3.0/scalatra-async-load-test.jmx
+jmeter -n -t scamper/load-test.jmx
+```
+
+#### Servlet 3.0 async
+
+```
+(cd scamper/servlet-3.0-async ; sbt run)
+```
+
+```
+jmeter -n -t scamper/load-test.jmx
+```
+
+#### Scalatra
+
+```
+(cd scamper/scalatra ; sbt run)
+```
+
+```
+jmeter -n -t scamper/load-test.jmx
 ```
 
 ### Node.js
