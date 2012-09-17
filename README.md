@@ -115,7 +115,7 @@ jmeter -n -t scamper/servlet-3.0/scalatra-async-load-test.jmx
 ### Node.js
 
 ```
-(cd scamper/node.js ; node app.js)
+(ulimit -n 4096 ; cd scamper/node.js ; node app.js)
 ```
 
 ```
