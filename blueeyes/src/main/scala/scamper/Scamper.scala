@@ -12,6 +12,7 @@ import blueeyes.BlueEyesServer
 object ScamperServer extends BlueEyesServer with ScamperService
 
 trait ScamperService extends BlueEyesServiceBuilder with BijectionsChunkString {
+  
   def sleep(ms: Long): Long = {
     val start = System.currentTimeMillis
     Thread.sleep(ms)
@@ -19,7 +20,7 @@ trait ScamperService extends BlueEyesServiceBuilder with BijectionsChunkString {
     stop - start
   }
 
-  val calculatorService = service("calculatorService", "1.0.0") {
+  val scamperService = service("scamperService", "1.0.0") {
     context =>
       startup {
         Future { () }
