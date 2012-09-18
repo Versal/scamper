@@ -2,6 +2,16 @@
 
 Scamper is a collection of RESTful libraries and frameworks, organized as a testbed for comparing the raw performance characteristics of each.
 
+Each implementation exposes the same three endpoints:
+
+* `GET /fast` blocks for 0 ms
+* `GET /medium` blocks for 150 ms
+* `GET /slow` blocks for 300 ms
+
+Each endpoint responds with `<h1>slept for { duration } ms</h1>`, where `duration` is the actual amount of time spent blocking.
+
+Each implementation runs on `localhost:9000` and can be tested with a variety of tools, such as [ApacheBench](http://en.wikipedia.org/wiki/ApacheBench) or [JMeter](http://jmeter.apache.org/).
+
 # Getting started
 
 ## Download scamper
@@ -26,7 +36,7 @@ npm install -g express
 
 https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 
-## Run and test each server
+## Run and test each implementation
 
 Each server can be tested with JMeter or ApacheBench:
 
@@ -81,13 +91,13 @@ ab -c 5 -n 10000 127.0.0.1:9000/fast
 (cd scamper/spray-can ; sbt run)
 ```
 
-### Servlet 3.0
+### [Servlet 3.0](http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html)
 
 ```
 (cd scamper/servlet-3.0 ; sbt run)
 ```
 
-#### Asynchronous Servlet 3.0
+#### [Asynchronous Servlet 3.0](http://docs.oracle.com/javaee/6/api/index.html?javax/servlet/AsyncContext.html)
 
 ```
 (cd scamper/servlet-3.0-async ; sbt run)
