@@ -2,6 +2,8 @@
 
 Scamper is a collection of RESTful libraries and frameworks, organized as a testbed for comparing the raw performance characteristics of each.
 
+For test results, see the [Wiki](https://github.com/Versal/scamper/wiki/Test-results).
+
 Each implementation exposes the same three endpoints:
 
 * `GET /fast` blocks for 0 ms
