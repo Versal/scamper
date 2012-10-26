@@ -99,7 +99,7 @@ ab -c 5 -n 10000 127.0.0.1:9000/fast
 ### [Play 2.0](https://github.com/playframework/Play20)
 
 ```
-(cd scamper/play2 ; sbt run)
+(cd scamper/play2 ; sbt start)
 ```
 
 ### [Play 2.0 mini](https://github.com/typesafehub/play2-mini)
