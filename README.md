@@ -25,13 +25,12 @@ For full test results, see the [Wiki](https://github.com/Versal/scamper/wiki/Tes
   <tr><td>BlueEyes (Netty)</td><td>14716.7</td></tr>
   <tr><td>spray-can</td><td>13338.7</td></tr>
   <tr><td>Scalatra</td><td>12434.7</td></tr>
-  <tr><td>Play 2 (Prod)</td><td>9661.8</td></tr>
-  <tr><td>Play 2 mini (Prod)</td><td>9388.8</td></tr>
+  <tr><td>Play 2</td><td>9661.8</td></tr>
+  <tr><td>Play 2 mini</td><td>9388.8</td></tr>
   <tr><td>Node.js</td><td>7401.4</td></tr>
   <tr><td>Lift</td><td>4875.2</td></tr>
   <tr><td>BlueEyes (Jetty)</td><td>4017.7</td></tr>
   <tr><td>Pinky</td><td>4008.8</td></tr>
-  <tr><td>Play 2 (Dev)</td><td>1250.5</td></tr>
   <tr><td>Finatra</td><td>466.4</td></tr>
   <tr><td>Finagle</td><td>DNF</td></tr>
 </table>
