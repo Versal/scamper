@@ -1,6 +1,5 @@
 unset key
 set title "Fast Test"
-set xlabel "Library"
 set ylabel "Requests per second"
 set style fill solid border -1
 set xtic rotate by -45
