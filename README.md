@@ -16,8 +16,6 @@ Each implementation runs on `localhost:9000` and can be tested with a variety of
 
 For full test results, see the [Wiki](https://github.com/Versal/scamper/wiki/Test-results).
 
-## Summary
-
 ![Fast Test](https://raw.github.com/Versal/scamper/master/readme/fast-test.png)
 
 # Getting started
