@@ -10,7 +10,7 @@ Each implementation exposes the same three endpoints:
 
 Each endpoint responds with `<h1>slept for { duration } ms</h1>`, where `duration` is the actual amount of time spent blocking.
 
-Each implementation runs on `localhost:9000` and can be tested with a variety of tools, such as [ApacheBench](http://en.wikipedia.org/wiki/ApacheBench) or [JMeter](http://jmeter.apache.org/).
+Each implementation runs on `localhost:9000` and can be tested with a variety of tools, such as [weighttp](https://github.com/lighttpd/weighttp) or [JMeter](http://jmeter.apache.org/).
 
 # Test results
 
@@ -44,7 +44,7 @@ https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 
 ## Run and test each implementation
 
-Each server can be tested with JMeter or ApacheBench:
+Each server can be tested with JMeter or weighttp:
 
 ```
 jmeter -n -t scamper/load-test.jmx
@@ -52,7 +52,7 @@ jmeter -n -t scamper/fast-test.jmx
 ```
 
 ```
-ab -c 5 -n 10000 127.0.0.1:9000/fast
+weighttp -n 500000 -c 20 -t 4 -k http://localhost:9000/fast
 ```
 
 ### [BlueEyes](https://github.com/jdegoes/blueeyes)
@@ -94,7 +94,7 @@ ab -c 5 -n 10000 127.0.0.1:9000/fast
 ### [spray-can](https://github.com/spray/spray-can)
 
 ```
-(cd scamper/spray-can ; sbt run)
+(cd scamper/spray ; sbt "project simple-http-server" run)
 ```
 
 ### [Servlet 3.0](http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html)

@@ -1,13 +1,13 @@
-"Servlet 3.0" 18772.3
-"Async Servlet 3.0" 17528.5
-"BlueEyes (Netty)" 14716.7
-"spray-can" 13338.7
-"Scalatra"  12434.7
-"Play 2"  9661.8
-"Play 2 mini" 9388.8
-"Node.js" 7401.4
-"Lift"  4875.2
-"BlueEyes (Jetty)"  4017.7
-"Pinky" 4008.8
-"Finatra" 466.4
+"Async Servlet 3.0" 53972
+"BlueEyes (Jetty)"  3989
+"BlueEyes (Netty)" 29823
 "Finagle" 0
+"Finatra" 10803
+"Lift"  4742
+"Node.js" 7929
+"Pinky" 4249
+"Play 2"  16184
+"Play 2 mini" 16715
+"Scalatra"  18833
+"Servlet 3.0" 54123
+"spray-can" 54996
