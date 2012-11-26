@@ -1,5 +1,3 @@
-# About
-
 Scamper is a collection of RESTful libraries and frameworks, organized as a testbed for comparing the raw performance characteristics of each.
 
 Each implementation exposes the same three endpoints:
