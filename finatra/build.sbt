@@ -1,11 +1,7 @@
 name := "scamper-finatra"
 
-resolvers += "repo.juliocapote.com" at "http://repo.juliocapote.com"
+resolvers += "twttr" at "http://maven.twttr.com"
 
-resolvers += "scala-tools.org" at "http://scala-tools.org/repo-releases"
-
-resolvers += "repo.codahale.com" at "http://repo.codahale.com"
-
-libraryDependencies += "com.twitter" % "finatra" % "0.1.7"
+libraryDependencies += "com.twitter" % "finatra" % "1.1.0"
 
 
