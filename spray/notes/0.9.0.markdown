@@ -1,0 +1,42 @@
+The [spray](http://spray.io) team is proudly announcing the availability of the release 0.9.0 of the _spray_ suite.
+A lot of work went into this latest incarnation of tools to make building RESTful web services with Scala and [Akka][]
+even more productive and fun.
+
+Note that this will be the last "major" release for Akka 1.x.
+
+Changes since _spray_ 0.8.0:
+
+- Upgrades:
+  - Scala 2.9.1
+  - Akka 1.3.1
+  - spray-json 1.1.0
+  - spray-can 0.9.3
+  - SBT 0.11.2
+- Changed dependency on akka-actor from scope 'compile' to scope 'provided'
+- Added support for chunked responses, including chunk compression and automatic file chunking
+- Added new directives: autoChunk, clientIP, completeWith, cookie, deleteCookie, dynamic, headerValue, headerValuePF,
+    optionalCookie, provide, redirect, reject, setCookie, transformChunkedResponse, transformRejections,
+    transformUnchunkedResponse
+- Added default Marshallers for Option, Either, HttpResult, HttpException, Stream, Future and Array[Byte]
+- Added support for JSON (de)serialization via lift-json
+- Added support for template rendering via Scalate
+- Added support for LDAP authentication
+- Added support for asynchronous and cached authentication
+- Added option for relaxed header parsing (issue #68)
+- Added DebuggingDirectives trait
+- Added TwirlSupport trait
+- Made FilterResult and SprayRoute1 monadic
+- Simplified custom rendering of Rejections to HttpResponses
+- Improved LruCache implementation to use com.googlecode.concurrentlinkedhashmap
+- Fixed #72 (spray-client: different HttpConduits sometimes and erroneously share connections)
+- Fixed #78 (spray-client: unexpected closing of connection not properly handled)
+- Fixed #59 (Factor out Rejection Conversion)
+- Fixed #67 ('cacheResults' directive should honor 'Cache-Control: no-cache/max-age' request header)
+- Fixed getFromResource directive to not serve "content" of resources ending with slash
+- Fixed most occurrences of implicit ambiguities with SprayJsonSupport
+- Fixed incorrect response status code for authentication failures with invalid credentials
+- Fixed several bugs in header parsing and rendering
+- Extended spray-example-spray-can to show off new streaming features
+- Lots of other fixes, additions and improvements
+
+  [Akka]: http://akka.io
