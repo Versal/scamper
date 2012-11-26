@@ -124,3 +124,9 @@ weighttp -n 500000 -c 20 -t 4 -k http://localhost:9000/fast
 ```
 (cd scamper/finatra ; sbt run)
 ```
+
+### [Rubble](https://github.com/JamesEarlDouglas/rubble)
+
+```
+(cd scamper/rubble ; sbt run)
+```
